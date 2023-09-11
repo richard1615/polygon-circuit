@@ -1,27 +1,10 @@
-# zardkat 🐱
+# Polygon circuit project
 
-A [hardhat-circom](https://github.com/projectsophon/hardhat-circom) template to generate zero-knowledge circuits, proofs, and solidity verifiers
+My implementation of the custom circuit for Polygon as part of metacrafters final project.
 
 ## Quick Start
 Compile the Multiplier2() circuit and verify it against a smart contract verifier
 
-```
-pragma circom 2.0.0;
-
-/*This circuit template checks that c is the multiplication of a and b.*/  
-
-template Multiplier2 () {  
-
-   // Declaration of signals.  
-   signal input a;  
-   signal input b;  
-   signal output c;  
-
-   // Constraints.  
-   c <== a * b;  
-}
-component main = Multiplier2();
-```
 ### Install
 `npm i`
 
@@ -100,6 +83,13 @@ To add a new circuit, you can run the `newcircuit` hardhat task to autogenerate 
 npx hardhat newcircuit --name newcircuit
 ```
 
-**determinism**
-> When you recompile the same circuit using the groth16 protocol, even with no changes, this plugin will apply a new final beacon, changing all the zkey output files. This also causes your Verifier contracts to be updated.
-> For development builds of groth16 circuits, we provide the --deterministic flag in order to use a NON-RANDOM and UNSECURE hardcoded entropy (0x000000 by default) which will allow you to more easily inspect and catch changes in your circuits. You can adjust this default beacon by setting the beacon property on a circuit's config in your hardhat.config.js file.
+Note: Before deploying make sure to add the networks tab to the hardhat.config.ts file
+
+```
+  networks: {
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [privateKey]
+    },
+  },
+```
